@@ -1,0 +1,58 @@
+.form {
+    width: 500px;
+    text-align: center;
+}
+
+.search-button {
+    margin-top: 10px;
+}
+
+.search-area {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+}
+
+.card {
+    text-align: center;
+    margin: auto auto auto auto;
+}
+
+.info-general {
+    text-align: center;
+}
+
+.poster-image {
+    width: 20%;
+}
+
+.title {
+    font-size: 3rem;
+}
+
+.show-info {
+    color: gray;
+}
+
+.plot {
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+hr {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.list {
+    margin-left: 50px;
+}
+
+.about {
+    text-align: center;
+    margin-top: 10px;
+}
