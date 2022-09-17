@@ -21,16 +21,23 @@
     margin: auto auto auto auto;
 }
 
-.info {
+.info-general {
+    text-align: center;
+}
+
+.info-cast {
     text-align: center;
 }
 
 .poster-image {
     width: 20%;
+    box-shadow: 5px 10px 10px;
+    border-radius: 20px;
 }
 
 .title {
     font-size: 3rem;
+    padding-top: 20px;
 }
 
 .show-info {
@@ -55,4 +62,43 @@ hr {
 .about {
     text-align: center;
     margin-top: 10px;
+}
+
+.cast-member {
+    display: inline-block;
+    width: 300px;
+}
+
+@media (max-width: 500px) {
+    .cast-member {
+        display: initial;
+    }
+}
+
+.others {
+    display: initial;
+}
+
+.actor-image {
+    border-radius: 20px;
+}
+
+.recommendations {
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+}
+
+.cards {
+    width:100%;
+    height:auto;
+    display:flex;
+}
+
+.text-bg-primary {
+    width:50%;height:100px;margin:10px;
 }

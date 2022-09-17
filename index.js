@@ -16,9 +16,10 @@ app.get("/", function(req, res) {
     res.render("home")
 })
 
+let actorImages = {}
+
 app.post("/", function(req, res) {
     const searchTerm = req.body.query
-    console.log(searchTerm)
 
     const options = {
         method: 'GET',
@@ -39,12 +40,10 @@ app.post("/", function(req, res) {
                 results.push(element)
             })
 
-            console.log(results)
             res.render("results", {list: results})
           } else {
         const ID = result.Search[0].imdbID
 
-          console.log(ID)
 
 
           const options = {
@@ -58,8 +57,36 @@ app.post("/", function(req, res) {
           };
           
           axios.request(options).then(function (response) {
-                console.log(response.data);
-                res.render("content", {data: response.data})
+              const actors = response.data.actors.slice(0,3)
+
+              console.log(response.data)
+
+              
+
+              actors.forEach(actor => {
+                const options = {
+                  method: 'GET',
+                  url: 'https://bing-image-search1.p.rapidapi.com/images/search',
+                  params: {q: actor.name, count: '1', mkt: 'en-US'},
+                  headers: {
+                    'X-RapidAPI-Key': '4f6fd7410bmsh2ba3c17a2e1e6f6p1b50b3jsnceb599548749',
+                    'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com'
+                  }
+                };
+                
+                axios.request(options).then(function (response) {
+                  const resp = response
+                  actorImages[actor.name] = resp.data.value[0].thumbnailUrl
+                }).catch(function (error) {
+                  console.error(error);
+                });
+  
+              })              
+
+              
+                setTimeout(() => {  res.render("content", {data: response.data, images: actorImages})
+                ; }, 3000);
+
           }).catch(function (error) {
               console.error(error);
           });
@@ -85,8 +112,35 @@ app.post("/results", function(req, res) {
     };
     
     axios.request(options).then(function (response) {
-          console.log(response.data);
-          res.render("content", {data: response.data})
+      const actors = response.data.actors.slice(0,3)
+
+              
+
+      actors.forEach(actor => {
+        const options = {
+          method: 'GET',
+          url: 'https://bing-image-search1.p.rapidapi.com/images/search',
+          params: {q: actor.name, count: '1', mkt: 'en-US'},
+          headers: {
+            'X-RapidAPI-Key': '4f6fd7410bmsh2ba3c17a2e1e6f6p1b50b3jsnceb599548749',
+            'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com'
+          }
+        };
+        
+        axios.request(options).then(function (response) {
+          const resp = response
+          actorImages[actor.name] = resp.data.value[0].thumbnailUrl
+          console.log(actorImages)
+        }).catch(function (error) {
+          console.error(error);
+        });
+
+      })              
+
+      console.log(response.data.actors)
+      
+      setTimeout(() => {  res.render("content", {data: response.data, images: actorImages})
+      ; }, 3000);
     }).catch(function (error) {
         console.error(error);
     });
